@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Government Logo">
+            <span>Complaint Dashboard</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <h1>Complaint Records</h1>
+        <table id="complaintTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Complaint</th>
+                    <th>Location</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be populated by JavaScript -->
+            </tbody>
+        </table>
+
+        <!-- Pagination Controls -->
+        <div class="pagination">
+            <button id="prevButton" disabled>Previous</button>
+            <span id="pageInfo">Page 1 of 5</span>
+            <button id="nextButton">Next</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2023 Government Complaint Portal. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript to Load Data -->
+    <script>
+        let currentPage = 1;
+        const itemsPerPage = 200; // Number of complaints to display per page
+        let totalPages = 1;
+
+        // Fetch JSON data and populate the table
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                totalPages = Math.ceil(data.length / itemsPerPage);
+                updateTable(data, currentPage);
+
+                // Event listener for Next button
+                document.getElementById('nextButton').addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        updateTable(data, currentPage);
+                        updatePaginationControls();
+                    }
+                });
+
+                // Event listener for Previous button
+                document.getElementById('prevButton').addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        updateTable(data, currentPage);
+                        updatePaginationControls();
+                    }
+                });
+            })
+            .catch(error => console.error('Error loading data:', error));
+
+        // Function to update the table with data for the current page
+        function updateTable(data, page) {
+            const tableBody = document.querySelector('#complaintTable tbody');
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageData = data.slice(startIndex, endIndex);
+
+            pageData.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${startIndex + index + 1}</td>
+                    <td>${item.Complaint}</td>
+                    <td>${item.Location}</td>
+                    <td>${item.Source}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Function to update pagination controls
+        function updatePaginationControls() {
+            document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+            document.getElementById('prevButton').disabled = currentPage === 1;
+            document.getElementById('nextButton').disabled = currentPage === totalPages;
+        }
+    </script>
+</body>
+</html>

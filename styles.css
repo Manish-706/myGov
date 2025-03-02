@@ -1,0 +1,109 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: #004a8d;
+    padding: 10px 20px;
+    color: white;
+}
+
+.navbar .logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.navbar .logo span {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1; /* Allow main content to grow and push the footer down */
+    padding: 20px;
+    text-align: center;
+    padding-bottom: 60px; /* Add padding to prevent footer overlap */
+}
+
+.main-content h1 {
+    font-size: 2.5em;
+    color: #004a8d;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px; /* Add margin below the table */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #004a8d;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #d4e3fc;
+    cursor: pointer;
+}
+
+/* Pagination Styles */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination button {
+    background-color: #004a8d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #004a8d;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: auto; /* Push the footer to the bottom */
+}
