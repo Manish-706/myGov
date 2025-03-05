@@ -24,6 +24,7 @@
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Person</th>
                     <th>Complaint</th>
                     <th>Location</th>
                     <th>Source</th>
@@ -92,10 +93,11 @@
             pageData.forEach((item, index) => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${startIndex + index + 1}</td>
-                    <td>${item.Complaint}</td>
-                    <td>${item.Location}</td>
-                    <td>${item.Source}</td>
+                <td>${startIndex + index + 1}</td>
+                <td>${item.Person}</td>
+                <td>${item.Complaint}</td>
+                <td>${item.Location}</td>
+                <td>${item.Source}</td>
                 `;
                 tableBody.appendChild(row);
             });
